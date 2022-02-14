@@ -1,6 +1,6 @@
-## Using the OPCON REST-API - some examples
+# Using the OPCON REST-API - some examples
 
-### use it (Work In Progress)
+## use it (Work In Progress)
 
 #### clone:
 
@@ -22,4 +22,4 @@ bundle
 rake
 ~~~
 
-### how it works
+## how it works

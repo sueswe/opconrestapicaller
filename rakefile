@@ -1,0 +1,35 @@
+require 'rake'
+#require 'rake/clean'
+require 'colorize'
+require 'logger'
+
+$stdout.sync = true
+
+logger = Logger.new(STDOUT)
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{severity} #{datetime}: #{msg}\n"
+end
+
+os = RbConfig::CONFIG["host_os"]
+homeDir = ENV["HOME"]
+
+logger.info "You are runnig on " + os.yellow
+
+task :default => %w[create_config]
+
+task :create_config do
+  if File.exists?("#{homeDir}/.opcontoken.yaml")
+    logger.info "Config-file already exists.".red
+  else
+    print "Enter hostname:port for test-stage: "
+    tserver = STDIN.gets.chomp
+    print "Enter external token for test-stage: "
+    ttoken = STDIN.gets.chomp
+    puts "writing config to #{homeDir}/.opcontoken.yaml ...".yellow
+    f = File.open("#{homeDir}/.opcontoken.yaml", 'w')
+    f.puts "server_teststage: \"#{tserver}\""
+    f.puts "external_token_teststage: \"#{ttoken}\""
+    f.close
+    puts "Thank you."
+  end
+end
