@@ -26,7 +26,7 @@ class Read_config
   end
 end
 
-class ReadBatchuser
+class ReadGprop
 
   def from_test
     logger = Logger.new(STDOUT)
@@ -46,4 +46,4 @@ class ReadBatchuser
 end
 
 
-ReadBatchuser.new.from_test
+ReadGprop.new.from_test
