@@ -16,7 +16,7 @@ targetDir = ENV["HOME"] + "/bin/"
 
 logger.info "You are runnig on " + os.yellow
 
-task :default => %w[create_bin create_config]
+task :default => %w[create_bin install create_config ]
 
 
 desc "Install bin/ruby-files to: ".yellow + targetDir.cyan
@@ -24,7 +24,7 @@ task :install do
     files = Rake::FileList["bin/*.rb"]
     files.each do |f|
         t = File.basename(f)
-        log.info "Installing #{f} to #{targetDir}/#{t} ".cyan
+        logger.info "Installing #{f} to #{targetDir}/#{t} ".cyan
         cp( f, targetDir, {:verbose => false})
     end
 end
@@ -55,7 +55,6 @@ task :create_config do
     print "Enter external token for test-stage: "
     token = STDIN.gets.chomp
     puts "writing config to #{homeDir}/.opcontoken.yaml ...".yellow
-    f = File.open("#{homeDir}/.opcontoken.yaml", 'w')
     f.puts "server_teststage: \"#{server}\""
     f.puts "external_token_teststage: \"#{token}\""
 
@@ -64,7 +63,6 @@ task :create_config do
     print "Enter external token for dev-stage: "
     token = STDIN.gets.chomp
     puts "writing config to #{homeDir}/.opcontoken.yaml ...".yellow
-    f = File.open("#{homeDir}/.opcontoken.yaml", 'w')
     f.puts "server_devstage: \"#{server}\""
     f.puts "external_token_devstage: \"#{token}\""
 
