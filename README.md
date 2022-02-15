@@ -1,6 +1,6 @@
 # Using the OPCON REST-API - some examples
 
-## use it (Work In Progress)
+## Installation
 
 #### clone:
 
@@ -20,13 +20,16 @@ bundle
 
 #### configuration
 
-This let you create a configuration file in your *$HOME* directory:
+This let you create a configuration file in your *$HOME* directory
+and copies the rb-scripts from bin/ to **$HOME/bin/** :
 
 ~~~ sh
 rake
 ~~~
 
 You have always the possibility to edit the file (**$HOME/.opcontoken.yaml**) manually.
+You can also just call a single task from the rakefile with `rake taskname`. You get a
+list of tasks by hitting `rake -T `.
 
 ## Usage
 
