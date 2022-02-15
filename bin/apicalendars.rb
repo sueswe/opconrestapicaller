@@ -62,7 +62,7 @@ elsif options[:dev] == true
   serverurlport = Read_config.get_serverport_devstage
 end
 
-logger.info "#{t}"
+#logger.info "#{t}"
 logger.info "#{serverurlport}"
 Excon.defaults[:ssl_verify_peer] = false
 response = Excon.get("https://#{serverurlport}/api/calendars?sortBy=name", :headers => {'Authorization' => "Token #{t}" })
