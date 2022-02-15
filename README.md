@@ -11,6 +11,8 @@ cd opconrestapicaller
 
 #### setup
 
+This will install the necessary gems:
+
 ~~~ sh
 bundle
 ~~~
@@ -18,20 +20,33 @@ bundle
 
 #### configuration
 
+This let you create a configuration file in your *$HOME* directory:
+
 ~~~ sh
 rake
 ~~~
 
+You have always the possibility to edit the file (**$HOME/.opcontoken.yaml**) manually.
 
+## Usage
 
-<hr>
-<hr>
+You can call each script for one of the defined stages. There is also the possibility to deactivate
+the use of the **PROXY** environment variables.
 
-> coming up:
+Usage by example:
+
+~~~ sh
+Usage: apiproperties.rb [options]
+    -n, --no-proxy                   unset proxy environment variables
+    -p, --production                 use production-stage - API
+    -t, --test                       use test-stage - API
+    -d, --developement               use dev-stage - API
+~~~
+
 
 ## how it works
 
-Based on DevOps-thoughts, you can add three configurations for Opcon-Servers: production, test and developement.
+Based on a maybe common setup, you can add three configurations for Opcon-servers: production, test and developement.
 (you don't have to; the rake command will ask you to enter three server-adresses and three external tokens.)
 You may leave them empty by hitting just enter ;  create a config-file by your own.
 
@@ -44,6 +59,12 @@ $HOME/.opcontoken.yaml
 and the layout of the file looks like:
 
 ~~~ yaml
+server_prodstage: "serveradress:port"
+external_token_prodstage: "tokenstring"
+
 server_teststage: "serveradress:port"
 external_token_teststage: "tokenstring"
+
+server_devstage: "serveradress:port"
+external_token_devstage: "tokenstring"
 ~~~
