@@ -12,14 +12,33 @@ end
 
 os = RbConfig::CONFIG["host_os"]
 homeDir = ENV["HOME"]
+targetDir = ENV["HOME"] + "/bin/"
 
 logger.info "You are runnig on " + os.yellow
 
-task :default => %w[create_config]
+task :default => %w[create_bin create_config]
 
+
+desc "Install bin/ruby-files to: ".yellow + targetDir.cyan
+task :install do
+    files = Rake::FileList["bin/*.rb"]
+    files.each do |f|
+        t = File.basename(f)
+        log.info "Installing #{f} to #{targetDir}/#{t} ".cyan
+        cp( f, targetDir, {:verbose => false})
+    end
+end
+
+desc "Create HOME/bin - directory".yellow
+task :create_bin do
+    #sh "mkdir $HOME/bin"
+    FileUtils.mkdir "#{homeDir}/bin" unless File.exists?("#{homeDir}/bin")
+end
+
+desc "Create a new config-file.".yellow
 task :create_config do
   if File.exists?("#{homeDir}/.opcontoken.yaml")
-    logger.info "Config-file already exists.".red
+    logger.info "Config-file (#{homeDir}/.opcontoken.yaml) already exists.".red
     puts "Edit file manually or rename it."
   else
     print "Enter hostname:port for prod-stage: "
