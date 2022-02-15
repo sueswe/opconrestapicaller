@@ -20,15 +20,35 @@ task :default => %w[create_config]
 task :create_config do
   if File.exists?("#{homeDir}/.opcontoken.yaml")
     logger.info "Config-file already exists.".red
+    puts "Edit file manually or rename it."
   else
-    print "Enter hostname:port for test-stage: "
-    tserver = STDIN.gets.chomp
-    print "Enter external token for test-stage: "
-    ttoken = STDIN.gets.chomp
+    print "Enter hostname:port for prod-stage: "
+    server = STDIN.gets.chomp
+    print "Enter external token for prod-stage: "
+    token = STDIN.gets.chomp
     puts "writing config to #{homeDir}/.opcontoken.yaml ...".yellow
     f = File.open("#{homeDir}/.opcontoken.yaml", 'w')
-    f.puts "server_teststage: \"#{tserver}\""
-    f.puts "external_token_teststage: \"#{ttoken}\""
+    f.puts "server_prodstage: \"#{server}\""
+    f.puts "external_token_prodstage: \"#{token}\""
+
+    print "Enter hostname:port for test-stage: "
+    server = STDIN.gets.chomp
+    print "Enter external token for test-stage: "
+    token = STDIN.gets.chomp
+    puts "writing config to #{homeDir}/.opcontoken.yaml ...".yellow
+    f = File.open("#{homeDir}/.opcontoken.yaml", 'w')
+    f.puts "server_teststage: \"#{server}\""
+    f.puts "external_token_teststage: \"#{token}\""
+
+    print "Enter hostname:port for dev-stage: "
+    server = STDIN.gets.chomp
+    print "Enter external token for dev-stage: "
+    token = STDIN.gets.chomp
+    puts "writing config to #{homeDir}/.opcontoken.yaml ...".yellow
+    f = File.open("#{homeDir}/.opcontoken.yaml", 'w')
+    f.puts "server_devstage: \"#{server}\""
+    f.puts "external_token_devstage: \"#{token}\""
+
     f.close
     puts "Thank you."
   end
