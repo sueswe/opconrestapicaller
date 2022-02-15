@@ -31,17 +31,19 @@ optparse = OptionParser.new do |opts|
   opts.on("-d","--developement","use dev-stage - API") do |x|
     options[:dev] = true
   end
-  opts.on("-s","--scheduleName SN" ,"list daily jobs for scheduleName") do |y|
+  opts.on("-s","--scheduleName SN" ,"list daily jobs for a scheduleName.  Wildcards allowed (*,?)") do |y|
     options[:schedulename] = y
   end
-  opts.on("-i","--imerominia I" ,"list daily jobs for a schedule date (yyyy-MM-dd)") do |z|
+  opts.on("-i","--idate scheduledate (imerominia) I" ,"list daily jobs for a schedule date (yyyy-MM-dd)") do |z|
     options[:scheduledate] = z
+  end
+  opts.on("-j","--jobname J" ,"list only spezific job(s) for a scheduleName. Wildcards allowed (*,?)") do |j|
+    options[:jobname] = j
   end
 end
 optparse.parse!
 
 logger.debug options
-
 
 if options[:noproxy] == true
   ENV['https_proxy'] = ''
@@ -53,7 +55,7 @@ end
 
 sname = options[:schedulename].to_s
 date = options[:scheduledate].to_s
-
+jobname = options[:jobname].to_s
 
 if options[:test] == true
   t = Read_config.get_token_teststage
@@ -76,6 +78,10 @@ end
 #logger.info "#{t}"
 logger.info "#{serverurlport}"
 Excon.defaults[:ssl_verify_peer] = false
-response = Excon.get("https://#{serverurlport}/api/dailyjobs?scheduleName=#{sname}&dates=#{date}", :headers => {'Authorization' => "Token #{t}" })
+if jobname.empty?
+  response = Excon.get("https://#{serverurlport}/api/dailyjobs?scheduleName=#{sname}&dates=#{date}", :headers => {'Authorization' => "Token #{t}" })
+else
+  response = Excon.get("https://#{serverurlport}/api/dailyjobs?scheduleName=#{sname}&dates=#{date}&jobName=#{jobname}", :headers => {'Authorization' => "Token #{t}" })
+end
 puts response.body
 logger.info "Response-status: " + response.status.to_s
