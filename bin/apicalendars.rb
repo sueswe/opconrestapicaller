@@ -37,7 +37,6 @@ optparse.parse!
 logger.debug options
 
 if options.empty?
-  logger.error "Mising option."
   puts optparse
   exit
 end
