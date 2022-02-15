@@ -69,7 +69,7 @@ elsif options[:dev] == true
 end
 
 if sname.empty? || date.empty?
-  logger.error "some options required."
+  logger.error "Some options are missing."
   puts ""
   puts optparse
   exit 1
