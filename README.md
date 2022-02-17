@@ -11,7 +11,13 @@ cd opconrestapicaller
 
 #### setup
 
-This will install the necessary gems:
+For example, on apt-based Linux-installations:
+
+~~~ sh
+sudo apt install ruby-dev ruby-bundler
+~~~
+
+Now run bundler. This will install the necessary gems:
 
 ~~~ sh
 bundle
