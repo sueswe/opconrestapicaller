@@ -23,6 +23,16 @@ Now run bundler. This will install the necessary gems:
 bundle
 ~~~
 
+Then you may configure your user-account , e.g. your .bashrc , with:
+
+~~~ sh
+export GEM_HOME="${HOME}/.gem"
+export GEM_PATH="${HOME}/.gem"
+export PATH="${PATH}:${HOME}/bin:${GEM_PATH}/bin"
+~~~
+
+Reload your .bashrc with `. ~/.bashrc` .
+
 
 #### configuration
 
@@ -30,12 +40,13 @@ This let you create a configuration file in your *$HOME* directory
 and copies the rb-scripts from bin/ to **$HOME/bin/** :
 
 ~~~ sh
+cd opconrestapicaller
 rake
 ~~~
 
 You have always the possibility to edit the file (**$HOME/.opcontoken.yaml**) manually.
 You can also just call a single task from the rakefile with `rake taskname`. You get a
-list of tasks by hitting `rake -T `.
+list of tasks by hitting `rake -T` .
 
 ## Usage
 
