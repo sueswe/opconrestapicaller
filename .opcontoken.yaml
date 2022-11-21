@@ -1,6 +1,0 @@
-server_prodstage: "172.16.64.40:9010"
-external_token_prodstage: "b84e1fef-7522-4022-9714-bc7f3f5529fb"
-server_teststage: "172.16.64.41:9010"
-external_token_teststage: "unknown"
-server_devstage: "172.16.64.42:9010"
-external_token_devstage: "unknown"
