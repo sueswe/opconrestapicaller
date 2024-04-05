@@ -16,7 +16,9 @@ targetDir = ENV["HOME"] + "/bin/"
 
 logger.info "You are runnig on " + os.yellow
 
-task :default => %w[create_bin install create_config ]
+
+
+task :default => %w[ create_bin install create_config ]
 
 
 desc "Install bin/ruby-files to: ".yellow + targetDir.cyan
@@ -25,14 +27,16 @@ task :install do
     files.each do |f|
         t = File.basename(f)
         logger.info "Installing #{f} to #{targetDir}/#{t} ".cyan
-        cp( f, targetDir, {:verbose => false})
+        cp( f, targetDir, :verbose => false)
     end
 end
 
 desc "Create HOME/bin - directory".yellow
 task :create_bin do
     #sh "mkdir $HOME/bin"
+    logger.info "creating HOME/bin (unless exists) ..."
     FileUtils.mkdir "#{homeDir}/bin" unless File.exists?("#{homeDir}/bin")
+    logger.info "done.".green
 end
 
 desc "Create a new config-file.".yellow
